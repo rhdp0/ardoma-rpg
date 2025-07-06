@@ -19,6 +19,17 @@ body {
   border: 3px solid #000;
 }
 
+.colunas {
+  display: flex;
+  gap: 20px;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 
@@ -56,6 +67,17 @@ h1 {
 .linha label {
   min-width: 120px;
   font-weight: bold;
+}
+
+.linha.compact label {
+  min-width: auto;
+  margin-right: 5px;
+}
+
+.bonus-group {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
 }
 
 .linha input,
@@ -97,6 +119,25 @@ textarea {
 
 .small {
   width: 60px;
+  text-align: center;
+}
+
+.mini {
+  width: 40px;
+  text-align: center;
+}
+
+.select-raca {
+  width: 100px;
+}
+
+.select-bonus {
+  width: 60px;
+  text-align: center;
+}
+
+.nivel-input {
+  width: 40px;
   text-align: center;
 }
 
@@ -165,6 +206,10 @@ button:hover {
   .stress-box {
     width: 30px;
     height: 30px;
+  }
+
+  .colunas {
+    flex-direction: column;
   }
 
   button {

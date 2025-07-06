@@ -13,100 +13,103 @@
 
     <h1>ARDOMA RPG</h1>
 
-    <div class="box">
-      <h2>IDENTIDADE</h2>
-      <div class="linha">
-        <label>Nome:</label>
-        <input type="text" id="nome">
-      </div>
-      <div class="linha">
-        <label>Raça:</label>
-        <select id="raca" onchange="atualizarRacialBonus()">
-          <option value="humano">Humano</option>
-          <option value="veyrei">Vey’rei</option>
-          <option value="drakkarim">Drakkarim</option>
-          <option value="oskari">Oskari</option>
-        </select>
-      </div>
-      <div class="linha" id="bonusHumanoDiv" style="display:none">
-        <label>Bônus Humano:</label>
-        <select id="bonusHumano">
-          <option value="for">FOR</option>
-          <option value="con">CON</option>
-          <option value="des">DES</option>
-          <option value="int">INT</option>
-          <option value="esp">ESP</option>
-          <option value="car">CAR</option>
-        </select>
-      </div>
-      <div class="linha">
-        <label>Nível:</label>
-        <input type="number" id="nivel" class="small" value="1">
-      </div>
-      <div class="linha">
-        <label>História:</label>
-        <textarea id="historia"></textarea>
-      </div>
-    </div>
+    <div class="colunas">
+      <div class="col esquerda">
+        <div class="box">
+          <h2>IDENTIDADE</h2>
+          <div class="linha">
+            <label>Nome:</label>
+            <input type="text" id="nome">
+          </div>
+          <div class="linha compact">
+            <label>Raça:</label>
+            <select id="raca" class="select-raca" onchange="atualizarRacialBonus()">
+              <option value="humano">Humano</option>
+              <option value="veyrei">Vey’rei</option>
+              <option value="drakkarim">Drakkarim</option>
+              <option value="oskari">Oskari</option>
+            </select>
+            <div id="bonusHumanoDiv" style="display:none" class="bonus-group">
+              <label>Bônus:</label>
+              <select id="bonusHumano" class="select-bonus">
+                <option value="for">FOR</option>
+                <option value="con">CON</option>
+                <option value="des">DES</option>
+                <option value="int">INT</option>
+                <option value="esp">ESP</option>
+                <option value="car">CAR</option>
+              </select>
+            </div>
+            <label>Nível:</label>
+            <input type="number" id="nivel" class="nivel-input" value="1">
+          </div>
+          <div class="linha">
+            <label>História:</label>
+            <textarea id="historia"></textarea>
+          </div>
+        </div>
 
-    <div class="box">
-      <h2>ATRIBUTOS</h2>
-      <div class="grid">
-        <div><label>FOR</label><input type="number" id="for" value="0"></div>
-        <div><label>CON</label><input type="number" id="con" value="0"></div>
-        <div><label>DES</label><input type="number" id="des" value="0"></div>
-        <div><label>INT</label><input type="number" id="int" value="0"></div>
-        <div><label>ESP</label><input type="number" id="esp" value="0"></div>
-        <div><label>CAR</label><input type="number" id="car" value="0"></div>
-      </div>
-    </div>
+        <div class="box">
+          <h2>ATRIBUTOS</h2>
+          <div class="grid">
+            <div><label>FOR</label><input type="number" id="for" value="0"></div>
+            <div><label>CON</label><input type="number" id="con" value="0"></div>
+            <div><label>DES</label><input type="number" id="des" value="0"></div>
+            <div><label>INT</label><input type="number" id="int" value="0"></div>
+            <div><label>ESP</label><input type="number" id="esp" value="0"></div>
+            <div><label>CAR</label><input type="number" id="car" value="0"></div>
+          </div>
+        </div>
 
-    <div class="box">
-      <h2>RECURSOS</h2>
-      <div class="linha">
-        <label>HP:</label>
-        <input type="number" id="hp" class="small" readonly>
+        <div class="box">
+          <h2>RECURSOS</h2>
+          <div class="linha">
+            <label>HP:</label>
+            <input type="number" id="hp" class="mini" readonly>
+          </div>
+          <div class="linha">
+            <label>PR:</label>
+            <input type="number" id="pr" class="mini" readonly>
+            <span>/</span>
+            <input type="number" id="prRec" class="mini" readonly>
+          </div>
+          <div class="linha">
+            <label>PA:</label>
+            <input type="number" id="pa" class="mini" readonly>
+            <span>/ 4</span>
+          </div>
+          <div class="linha">
+            <label>Recuperação PR:</label>
+            <label class="radio"><input type="radio" name="rec" value="con" checked> Constituição</label>
+            <label class="radio"><input type="radio" name="rec" value="int"> Inteligência</label>
+          </div>
+          <div class="linha">
+            <label>Estresse:</label>
+            <div class="stress-boxes">
+              <div class="stress-box">1</div>
+              <div class="stress-box">2</div>
+              <div class="stress-box">3</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="linha">
-        <label>PR:</label>
-        <input type="number" id="pr" class="small" readonly>
-        <span>/</span>
-        <input type="number" id="prRec" class="small" readonly>
-      </div>
-      <div class="linha">
-        <label>PA:</label>
-        <input type="number" id="pa" class="small" readonly>
-        <span>/ 4</span>
-      </div>
-      <div class="linha">
-        <label>Recuperação PR:</label>
-        <label class="radio"><input type="radio" name="rec" value="con" checked> Constituição</label>
-        <label class="radio"><input type="radio" name="rec" value="int"> Inteligência</label>
-      </div>
-    </div>
 
-    <div class="box">
-      <h2>ARDOMAS / VANTAGENS</h2>
-      <textarea id="vantagens"></textarea>
-    </div>
+      <div class="col direita">
+        <div class="box">
+          <h2>ARDOMAS / VANTAGENS</h2>
+          <textarea id="vantagens"></textarea>
+        </div>
 
-    <div class="box">
-      <h2>CONTRATOS / DESVANTAGENS</h2>
-      <textarea id="desvantagens"></textarea>
-    </div>
+        <div class="box">
+          <h2>CONTRATOS / DESVANTAGENS</h2>
+          <textarea id="desvantagens"></textarea>
+        </div>
 
-    <div class="box">
-      <h2>ESTRESSE</h2>
-      <div class="stress-boxes">
-        <div class="stress-box">1</div>
-        <div class="stress-box">2</div>
-        <div class="stress-box">3</div>
+        <div class="box">
+          <h2>ITENS / ANOTAÇÕES</h2>
+          <textarea id="itens"></textarea>
+        </div>
       </div>
-    </div>
-
-    <div class="box">
-      <h2>ITENS / ANOTAÇÕES</h2>
-      <textarea id="itens"></textarea>
     </div>
 
     <button onclick="gerarFicha()">Atualizar Ficha</button>
