@@ -21,11 +21,22 @@
       </div>
       <div class="linha">
         <label>Raça:</label>
-        <select id="raca">
+        <select id="raca" onchange="atualizarRacialBonus()">
           <option value="humano">Humano</option>
           <option value="veyrei">Vey’rei</option>
           <option value="drakkarim">Drakkarim</option>
           <option value="oskari">Oskari</option>
+        </select>
+      </div>
+      <div class="linha" id="bonusHumanoDiv" style="display:none">
+        <label>Bônus Humano:</label>
+        <select id="bonusHumano">
+          <option value="for">FOR</option>
+          <option value="con">CON</option>
+          <option value="des">DES</option>
+          <option value="int">INT</option>
+          <option value="esp">ESP</option>
+          <option value="car">CAR</option>
         </select>
       </div>
       <div class="linha">
