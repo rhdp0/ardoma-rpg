@@ -1,0 +1,83 @@
+function gerarFicha() {
+  const nivel = parseInt(document.getElementById('nivel').value);
+  const raca = document.getElementById('raca').value;
+
+  let atributos = {
+    FOR: parseInt(document.getElementById('for').value),
+    CON: parseInt(document.getElementById('con').value),
+    DES: parseInt(document.getElementById('des').value),
+    INT: parseInt(document.getElementById('int').value),
+    ESP: parseInt(document.getElementById('esp').value),
+    CAR: parseInt(document.getElementById('car').value)
+  };
+
+  // Bônus racial (ex.: Humano +1 FOR)
+  if (raca === "humano") {
+    atributos.FOR += 1;
+  }
+
+  // HP Progressivo
+  let hp = 0;
+  if (atributos.CON > 0) {
+    hp = atributos.CON * (10 + (nivel - 1) * 3);
+  } else {
+    hp = 10;
+  }
+  document.getElementById('hp').value = hp;
+
+  // PR Progressivo
+  let esp = atributos.ESP > 0 ? atributos.ESP : 0;
+  let pr = (nivel * (1 + esp)) + 2;
+  document.getElementById('pr').value = pr;
+
+  // PR Recuperado
+  let recAttr = document.querySelector('input[name="rec"]:checked').value;
+  let recValue = atributos[recAttr.toUpperCase()];
+  let prRec = recValue > 0 ? 1 + Math.floor(recValue / 2) : 1;
+  document.getElementById('prRec').value = prRec;
+
+  // PA fixo
+  document.getElementById('pa').value = 4;
+}
+
+function gerarPDF() {
+  const ficha = document.querySelector('.ficha');
+
+  html2canvas(ficha, {scale: 2}).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+
+    const pdf = new jspdf.jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgWidth = pageWidth;
+    const imgHeight = (imgProps.height * imgWidth) / imgProps.width;
+
+    let position = 0;
+
+    if (imgHeight < pageHeight) {
+      // só uma página
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+    } else {
+      // gera várias páginas se necessário
+      let remainingHeight = imgHeight;
+      while (remainingHeight > 0) {
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        remainingHeight -= pageHeight;
+        if (remainingHeight > 0) {
+          pdf.addPage();
+          position = - (imgHeight - remainingHeight);
+        }
+      }
+    }
+
+    pdf.save("ficha_ardoma_rpg.pdf");
+  });
+}
+
