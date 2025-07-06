@@ -11,9 +11,10 @@ function gerarFicha() {
     CAR: parseInt(document.getElementById('car').value)
   };
 
-  // Bônus racial (ex.: Humano +1 FOR)
+  // Bônus racial
   if (raca === "humano") {
-    atributos.FOR += 1;
+    const bonus = document.getElementById('bonusHumano').value.toUpperCase();
+    atributos[bonus] += 1;
   }
 
   // HP Progressivo
@@ -38,6 +39,14 @@ function gerarFicha() {
 
   // PA fixo
   document.getElementById('pa').value = 4;
+}
+
+function atualizarRacialBonus() {
+  const raca = document.getElementById('raca').value;
+  const bonusDiv = document.getElementById('bonusHumanoDiv');
+  if (bonusDiv) {
+    bonusDiv.style.display = raca === 'humano' ? 'flex' : 'none';
+  }
 }
 
 function gerarPDF() {
@@ -80,4 +89,6 @@ function gerarPDF() {
     pdf.save("ficha_ardoma_rpg.pdf");
   });
 }
+
+document.addEventListener('DOMContentLoaded', atualizarRacialBonus);
 
