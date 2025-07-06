@@ -11,11 +11,6 @@ function gerarFicha() {
     CAR: parseInt(document.getElementById('car').value)
   };
 
-  // Bônus racial
-  if (raca === "humano") {
-    const bonus = document.getElementById('bonusHumano').value.toUpperCase();
-    atributos[bonus] += 1;
-  }
 
   // HP Progressivo
   let hp = 0;
@@ -46,6 +41,24 @@ function atualizarRacialBonus() {
   const bonusDiv = document.getElementById('bonusHumanoDiv');
   if (bonusDiv) {
     bonusDiv.style.display = raca === 'humano' ? 'flex' : 'none';
+  }
+}
+
+const atributosIds = ['for','con','des','int','esp','car'];
+
+function aplicarBonusHumano() {
+  const raca = document.getElementById('raca').value;
+  atributosIds.forEach(id => {
+    const input = document.getElementById(id);
+    if (input.dataset.base === undefined) {
+      input.dataset.base = input.value;
+    }
+    input.value = input.dataset.base;
+  });
+  if (raca === 'humano') {
+    const bonusAttr = document.getElementById('bonusHumano').value;
+    const input = document.getElementById(bonusAttr);
+    input.value = parseInt(input.dataset.base) + 1;
   }
 }
 
@@ -90,5 +103,21 @@ function gerarPDF() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', atualizarRacialBonus);
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarRacialBonus();
+  atributosIds.forEach(id => {
+    const input = document.getElementById(id);
+    input.dataset.base = input.value;
+    input.addEventListener('change', () => {
+      input.dataset.base = input.value;
+      aplicarBonusHumano();
+    });
+  });
+  document.getElementById('bonusHumano').addEventListener('change', aplicarBonusHumano);
+  document.getElementById('raca').addEventListener('change', () => {
+    atualizarRacialBonus();
+    aplicarBonusHumano();
+  });
+  aplicarBonusHumano();
+});
 
