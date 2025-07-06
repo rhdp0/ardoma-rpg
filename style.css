@@ -7,6 +7,10 @@ body {
   padding: 20px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .ficha {
   max-width: 850px;
   margin: auto;
@@ -45,6 +49,7 @@ h1 {
 .linha {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 8px;
 }
 
@@ -70,7 +75,7 @@ textarea {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
   gap: 10px;
 }
 
@@ -131,5 +136,39 @@ button {
 
 button:hover {
   background: #333;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .ficha {
+    padding: 15px;
+    border-width: 2px;
+  }
+
+  .linha {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .linha label {
+    min-width: auto;
+    margin-bottom: 4px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stress-box {
+    width: 30px;
+    height: 30px;
+  }
+
+  button {
+    font-size: 14px;
+  }
 }
 
