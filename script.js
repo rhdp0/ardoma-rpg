@@ -103,6 +103,12 @@ function gerarPDF() {
   });
 }
 
+async function rolarDados(sides, count) {
+  const res = await fetch(`http://localhost:3000/dice/${sides}/${count}`);
+  const data = await res.json();
+  alert(`Rolagens: ${data.rolls.join(', ')}`);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   atualizarRacialBonus();
   atributosIds.forEach(id => {

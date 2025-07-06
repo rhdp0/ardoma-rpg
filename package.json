@@ -1,0 +1,22 @@
+{
+  "name": "ardoma-rpg",
+  "version": "1.0.0",
+  "description": "Este projeto é um **sistema digital para criar fichas de personagem** do Ardoma RPG, totalmente baseado nas regras oficiais descritas no livro **Ardoma RPG V3**.",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}

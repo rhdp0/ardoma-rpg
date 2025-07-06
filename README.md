@@ -32,6 +32,30 @@ Ardoma RPG é um jogo de interpretação de papéis (RPG) em que os jogadores s�
 
 ---
 
+## 💻 Nova Estrutura (Node.js + Express + React)
+
+Com a expansão do projeto, adicionamos um pequeno backend em **Node.js** com **Express** e uma estrutura preparada para um frontend em **React**. A API oferece rotas para:
+
+1. **Login** (`POST /login`) – retorna um token fictício.
+2. **Criação e salvamento de fichas** (`POST /characters` e `GET /characters/:id`).
+3. **Oráculos** (`GET /oracles/campaign` e `GET /oracles/masterless`).
+4. **Rolagem de dados** (`GET /dice/:sides/:count`).
+
+Os dados são mantidos em memória apenas para demonstração. Para algo em produção, configure um banco de dados (PostgreSQL ou MongoDB) e ajuste os modelos.
+
+Para iniciar o servidor durante o desenvolvimento:
+
+```bash
+npm install
+npm run dev
+```
+
+Isso executará `server/index.js` com nodemon.
+
+Abra `client/index.html` em um navegador para testar a tela de login usando React.
+
+---
+
 ## 🚀 Como Funciona o Cálculo?
 
 ### 1. Atributos
