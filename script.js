@@ -109,6 +109,41 @@ async function rolarDados(sides, count) {
   alert(`Rolagens: ${data.rolls.join(', ')}`);
 }
 
+async function salvarFicha() {
+  const dados = {
+    nome: document.getElementById('nome').value,
+    raca: document.getElementById('raca').value,
+    nivel: parseInt(document.getElementById('nivel').value),
+    historia: document.getElementById('historia').value,
+    atributos: {
+      FOR: parseInt(document.getElementById('for').value),
+      CON: parseInt(document.getElementById('con').value),
+      DES: parseInt(document.getElementById('des').value),
+      INT: parseInt(document.getElementById('int').value),
+      ESP: parseInt(document.getElementById('esp').value),
+      CAR: parseInt(document.getElementById('car').value)
+    },
+    recursos: {
+      hp: parseInt(document.getElementById('hp').value),
+      pr: parseInt(document.getElementById('pr').value),
+      prRec: parseInt(document.getElementById('prRec').value),
+      pa: parseInt(document.getElementById('pa').value)
+    },
+    vantagens: document.getElementById('vantagens').value,
+    desvantagens: document.getElementById('desvantagens').value,
+    itens: document.getElementById('itens').value,
+    imagem: document.getElementById('previewImagem').src || ''
+  };
+
+  const res = await fetch('http://localhost:3000/characters', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  });
+  const data = await res.json();
+  alert(`Ficha salva com ID ${data.id}`);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   atualizarRacialBonus();
   atributosIds.forEach(id => {
@@ -124,6 +159,20 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarRacialBonus();
     aplicarBonusHumano();
   });
+  const imgInput = document.getElementById('imagem');
+  const preview = document.getElementById('previewImagem');
+  if (imgInput) {
+    imgInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        preview.src = ev.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    });
+  }
   aplicarBonusHumano();
 });
 
